@@ -140,7 +140,7 @@ private static ThreadLocal<List<String>> myThreadLocal =
 
 ## JUC
 
-![](C:\Users\lenovo\Desktop\学习总结\img\406312-20160614144055573-1639231351.png)
+![](.\img\406312-20160614144055573-1639231351.png)
 
 ### AQS
 
@@ -320,7 +320,7 @@ public class AsyncProcessor {
 
 ### Collections
 
-![](C:\Users\lenovo\Desktop\学习总结\img\webp)
+![](.\img\webp)
 
 ### locks
 
