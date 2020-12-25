@@ -54,9 +54,9 @@
 
 ### 对象内存布局
 
-![](C:\Users\lenovo\Desktop\学习总结\img\watermark)
+![](.\img\watermark)
 
-![](C:\Users\lenovo\Desktop\学习总结\img\70)
+![](.\img\70)
 
 
 
@@ -71,7 +71,7 @@
 - 偏向线程ID
 - 偏向时间戳
 
-![](C:\Users\lenovo\Desktop\学习总结\img\71)
+![](.\img\71)
 
 ##### 类型指针(开启压缩指针4个字节,不压缩指针8个字节)
 
@@ -137,7 +137,7 @@
 
 #### 垃圾收集器组合(hotspot)
 
-![](C:\Users\lenovo\Desktop\学习总结\img\72)
+![](.\img\72)
 
 - Serial (DefNew) + Serial Old（Serial Mark Sweep Compact） ,-XX:+UseSerialGC
 - Parallel (ParNew) + Serial Old（Serial Mark Sweep Compact）,-XX:+UseParNewGC
@@ -149,7 +149,7 @@
 
 ### 内存分配策略
 
-![](C:\Users\lenovo\Desktop\学习总结\img\73)
+![](.\img\73)
 
 - 对象优先在Eden分配
 - 大对象直接进入老年代
