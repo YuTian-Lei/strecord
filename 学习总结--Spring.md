@@ -16,7 +16,7 @@
 
 - Spring Web：提供了Servlet监听器的Context和Web应用的上下文
 
-  ![](C:\Users\lenovo\Desktop\学习总结\img\v2-0abd05fadd67aa418f9fed5410ee96d8_720w.jpg)
+  ![](.\img\v2-0abd05fadd67aa418f9fed5410ee96d8_720w.jpg)
 
 ## Spring IOC
 
