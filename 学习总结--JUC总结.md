@@ -140,7 +140,7 @@ private static ThreadLocal<List<String>> myThreadLocal =
 
 ## JUC
 
-![](C:\Users\lenovo\Desktop\学习总结\img\406312-20160614144055573-1639231351.png)
+![](.\img\406312-20160614144055573-1639231351.png)
 
 ### AQS
 
@@ -288,6 +288,26 @@ public class AsyncProcessor {
 }
 //关于corePoolSize、maxPoolSize、queueCapacity之间的关系：
 //corePoolSize为初始线程个数，当corePoolSize的线程都在执行中时，则将Runnable临时放入queueCapacity的缓冲队列中等待，当queueCapacity满了时，才会将线程个数从corePoolSize扩展至maxPoolSize，如果此时queueCapacity缓存队列任然是满的，则后续Runnable对象加入其中时就会被abort抛弃。
+1.线程数量 < corePoolSize  corePoolSize运行
+2.corePoolSize < 线程数量 < queueCapacity   corePoolSize全部运行,多出的放入缓冲队列中
+3.corePoolSize + queueCapacity   < 线程数量  < maxPoolSize + queueCapacity  最大线程开启,超出核心线程数和队列容量和的线程,放入最大线程中运行
+4.线程数量 > maxPoolSize + queueCapacity     触发拒绝策略
+    
+    
+1.线程池不添加任务,则poolSize为0;之后添加任务数 < corePoolSize,则poolSize = 添加的任务数; 线程开启后一直存在,不会超时销毁
+2.allowCoreThreadTimeOut = false 核心线程一直存在,最大线程超时(空闲超时)自动销毁
+3.allowCoreThreadTimeOut = true  核心线程超时(空闲超时)自动销毁,最大线程超时(空闲超时)自动销毁
+    
+    
+    
+1.当线程池小于corePoolSize时，新提交任务将创建一个新线程执行任务，即使此时线程池中存在空闲线程。
+2.当线程池达到corePoolSize时，新提交任务将被放入workQueue中，等待线程池中任务调度执行
+3.当workQueue已满，且maximumPoolSize>corePoolSize时，新提交任务会创建新线程执行任务
+4.当提交任务数超过maximumPoolSize时，新提交任务由RejectedExecutionHandler处理
+5.当线程池中超过corePoolSize线程，空闲时间达到keepAliveTime时，关闭空闲线程
+6.当设置allowCoreThreadTimeOut(true)时，线程池中corePoolSize线程空闲时间达到keepAliveTime也将关闭    
+    
+//allowCoreThreadTimeOut这个方法就像其字面的意思一样，允许Core Thread超时后可以关闭
 ```
 
 #### 拒绝策略
@@ -300,7 +320,7 @@ public class AsyncProcessor {
 
 ### Collections
 
-![](C:\Users\lenovo\Desktop\学习总结\img\webp)
+![](.\img\webp)
 
 ### locks
 

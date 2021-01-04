@@ -109,7 +109,7 @@
 ## Redis高并发分布式锁实战
 
 ```Java
-//redis 2.8之前 
+//redis 2.8之前  本质是setknx与expire不是原子操作
 public static  boolean acquire(Jedis jedis, String lockKey, int lockTimeout){
        log.info("分布式锁获取--开始");
        Long setnxResult = jedis.setnx(lockKey,String.valueOf(System.currentTimeMillis() + lockTimeout));
@@ -160,6 +160,16 @@ public static  boolean acquire(Jedis jedis, String lockKey, int lockTimeout){
         return success != null && success;
     }
 
+
+//释放锁
+ public static void release(Jedis jedis, String lockKey){
+        jedis.del(lockKey);
+ }
+
+ public static boolean release(String lockId) {
+        Boolean success = redisTemplate.delete(lockId);
+        return success != null && success;
+ }
 ```
 
 ## Redis缓存穿透、缓存击穿、缓存雪崩实战解析
