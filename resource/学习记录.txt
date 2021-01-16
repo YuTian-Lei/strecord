@@ -18,3 +18,9 @@
 8.jvm
 9.java并发
 10.netty
+
+
+https
+spring security
+shiro
+Oauth2+jwt token 微服务认证中心（认证+授权）
