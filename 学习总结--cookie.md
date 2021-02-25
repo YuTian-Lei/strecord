@@ -103,11 +103,17 @@ $.cookie('the_cookie','the_value',{
 - cookie路径:不同路径下的URL请求,cookie不能互相访问
 - cookie域：不同域下的URL请求,cookie不能互相访问
 
+### 同源策略的限制
+
+1. 不能获取不同源的cookie，LocalStorage 和 indexDB
+2. 不能获取非同源的DOM
+3. 不能发送非同源的ajax请求。（**准确说应该是可以向非同源的服务器发起请求，但是返回的数据会被浏览器拦截**）
+
 ### 解决方案
 
 - nginx反向代理
 - jsonp
-- 前后端搭配(前端设置withCredentials为true，后端设置Header的方式)
+- cors--前后端搭配(前端设置withCredentials为true，后端设置Header的方式)
 
 ### nginx反向代理
 
@@ -202,9 +208,15 @@ $("#submit").on("click", function(){
 </script>
 ```
 
+### cors
 
-
-### 前后端搭配
+> **CORS 需要浏览器和后端同时支持。IE 8 和 9 需要通过 XDomainRequest 来实现**。
+>
+> 这是因为我们的WEB服务器没有设置`ACCESS-CONTROL-ALLOW-ORIGIN`头部，默认情况下是禁止跨域引用资源的。
+>
+> **当然这里有一点要注意，其实这个跨域请求是发送成功了的，服务器也有返回test.js内容，只是浏览器禁止Javascript去取response的数据而已**。
+>
+> **跨域是浏览器行为，不是服务器行为。**实际上，**请求已经到达服务器了，只不过在回来的时候被浏览器限制了**。
 
 #### 服务器
 
@@ -218,6 +230,29 @@ response.setHeader("Access-Control-Allow-Origin",request.getHeader("Origin"));
 
 //表明服务器支持的头信息字段
 response.setHeader("Access-Control-Allow-Headers","content-type");
+
+//springboot
+@Configuration
+public class GlobalCorsConfig {
+    /**
+     * 允许跨域调用的过滤器
+     */
+    @Bean
+    public CorsFilter corsFilter() {
+        CorsConfiguration config = new CorsConfiguration();
+        //允许所有域名进行跨域调用
+        config.addAllowedOrigin("*");
+        //允许跨越发送cookie
+        config.setAllowCredentials(true);
+        //放行全部原始头信息
+        config.addAllowedHeader("*");
+        //允许所有请求方法跨域调用
+        config.addAllowedMethod("*");
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
+    }
+}
 ```
 
 #### 前端
