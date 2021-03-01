@@ -685,6 +685,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 }
 ```
 
+#### SpringAOP使用的局限
+
+- Spring AOP 方法内部调用不生效
+- @Transactional
+- @Retryable
+- Aspect切面增强
+
 ## Spring MVC
 
 #### 父子容器

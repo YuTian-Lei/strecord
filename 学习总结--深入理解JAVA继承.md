@@ -9,7 +9,7 @@
 - 若**重写父类方法,根据Java多态的特性,调用的是子类重写方法**,父类方法只有通过super指针调用
 - **多态只对方法起作用,不对字段起作用**
 
-![](C:\Users\lenovo\Desktop\学习总结\img\SouthEast.png)
+![](.\img\SouthEast.png)
 
 ## 举例
 
